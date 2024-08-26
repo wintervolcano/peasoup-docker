@@ -1,4 +1,4 @@
-FROM nvidia/cuda:8.0-devel-ubuntu16.04
+FROM nvidia/cuda:10.2-devel-ubuntu20.04
 
 RUN apt-get update &&\
     apt-get install -y --no-install-recommends \
@@ -7,13 +7,15 @@ RUN apt-get update &&\
 
 WORKDIR /software/
 
-RUN git clone https://github.com/ewanbarr/dedisp.git && \
+RUN git clone https://github.com/wintervolcano/dedisp.git && \
     cd dedisp &&\
+    git checkout arch-sm89 && \
     make -j 32 && \
     make install 
 
-RUN git clone https://github.com/ewanbarr/peasoup.git && \
+RUN git clone https://github.com/wintervolcano/peasoup.git && \
     cd peasoup && \
+    git checkout arch89 && \
     make -j 32 && \
     make install 
    
